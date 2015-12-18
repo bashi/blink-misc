@@ -1,0 +1,54 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+
+<link rel="import" href="diff-view.html">
+<link rel="import" href="interface-list.html">
+
+<dom-module id="diff-main-view">
+  <template>
+    <style>
+     * {
+       font-family: monospace;
+     }
+    </style>
+    <div class="layout horizontal">
+      <interface-list id="list" names={{model.interfaceNames}}></interface-list>
+      <div>
+        <diff-view id="webkit-idl-view"></diff-view>
+      </div>
+      <div>
+        <diff-view id="blink-idl-view"></diff-view>
+      </div>
+    </div>
+  </template>
+  <script>
+  Polymer({
+    is: 'diff-main-view',
+    properties: {
+      model: {
+        type: Object,
+        notify: true
+      }
+    },
+    ready: function() {
+      var list = document.querySelector('#list');
+      list.addEventListener('interface-selected',
+                            this._onInterfaceSelected.bind(this));
+      this._webkit = document.querySelector('#webkit-idl-view');
+      this._blink =  document.querySelector('#blink-idl-view');
+    },
+    showDiff: function(name) {
+      if (!this.model)
+        return;
+      var diffs = this.model.getDiff(name);
+      this._webkit.attributes = diffs.attributes.a;
+      this._blink.attributes = diffs.attributes.b;
+      this._webkit.operations = diffs.operations.a;
+      this._blink.operations = diffs.operations.b;
+    },
+    _onInterfaceSelected: function(e) {
+      this.showDiff(e.detail.name);
+    }
+  });
+  </script>
+</dom-module>

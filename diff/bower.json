@@ -1,0 +1,25 @@
+{
+  "name": "old_idl_diff",
+  "homepage": "https://github.com/bashi/blink-misc",
+  "authors": [
+    "Kenichi Ishibashi <bashi@chromium.org>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "Apache-2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "jquery": "~2.1.4",
+    "paper-styles": "PolymerElements/paper-styles#~1.0.13",
+    "paper-listbox": "polymerelements/paper-listbox#~1.1.0"
+  }
+}

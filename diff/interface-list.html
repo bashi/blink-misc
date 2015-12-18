@@ -1,0 +1,36 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/paper-listbox.html">
+
+<dom-module id="interface-list">
+  <template>
+    <div>
+      <input type="text" value="{{filterVal::input}}">
+      <ul>
+        <template is="dom-repeat" items="{{names}}" as="name" filter="{{_filter(filterVal)}}">
+          <li on-click="_handleClick">{{name}}</li>
+        </template>
+      </ul>
+    </div>
+  </template>
+  <script>
+
+  Polymer({
+    is: 'interface-list',
+    properties: {
+      names: Array
+    },
+    _handleClick: function(e) {
+      this.fire('interface-selected', {name: e.target.innerText});
+    },
+    _filter: function(val) {
+      return function(name) {
+        if (!val) return true;
+        if (!name) return false;
+        return name.toLowerCase().indexOf(val.toLowerCase()) >= 0;
+      };
+    },
+    ready: function() {
+    }
+  });
+  </script>
+</dom-module>

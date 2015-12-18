@@ -1,0 +1,27 @@
+<link rel="import"
+      href="bower_components/polymer/polymer.html">
+
+<dom-module id="diff-main-view">
+  <template>
+    <div>hoge</div>
+    <ul>
+      <template is="dom-repeat" items="{{model.interfaceNames}}" as="name">
+        <ul>{{name}}</ul>
+      </template>
+    </ul>
+  </template>
+  <script>
+  Polymer({
+    is: 'diff-main-view',
+    properties: {
+      model: {
+        type: Object,
+        notify: true
+      }
+    },
+    ready: function() {
+      console.log(this.model);
+    }
+  });
+  </script>
+</dom-module>

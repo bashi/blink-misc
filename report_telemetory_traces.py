@@ -37,6 +37,7 @@ class HTMLTrace(object):
                 self._html_contents = f.read()
             renderer_dump = self._get_renderer_dump()
             self.partitions = self._partitions_sizes(renderer_dump)
+            self.partitions_allocated_sizes = self._partitions_allocated_objects_sizes(renderer_dump)
             self.partition_details = self._partition_alloc_details(renderer_dump)
         else:
             self.partitions = {}
@@ -86,7 +87,7 @@ class HTMLTrace(object):
                 continue
             partition = parts[1]
             category = parts[2]
-            if len(parts) <= 3 and category in ['vector', 'shared_buffer', 'hash_table', 'string_impl']:
+            if len(parts) <= 3 and category in ['vector', 'shared_buffer', 'hash_table', 'string_impl', 'others']:
                 details[partition][category] = int(dump['attrs']['size']['value'], 16)
         return details
 
@@ -105,11 +106,24 @@ class HTMLTrace(object):
             sizes[category] = sizes.get(category, 0) + int(dump['attrs']['size']['value'], 16)
         return sizes
 
+    def _partitions_allocated_objects_sizes(self, renderer_dump):
+        sizes = {}
+        allocators = renderer_dump['args']['dumps']['allocators']
+        for fullname, dump in allocators.iteritems():
+            parts = fullname.split('/')
+            if not fullname.startswith('partition_alloc/partitions'):
+                continue
+            if len(parts) != 3:
+                continue
+            category = parts[2]
+            sizes[category] = sizes.get(category, 0) + int(dump['attrs']['allocated_objects_size']['value'], 16)
+        return sizes
+
 
 # TODO(bashi): We can't report 'malloc' because we use stl containers to
 # hold live objects, which bloats memory usage of 'malloc' drastically.
 _ALLOCATORS_TO_REPORT = [
-    'partition_alloc', 'v8', 'cc', 'discardable', 'blink_gc', 'skia']
+    'partition_alloc', 'blink_gc', 'v8', 'skia', 'discardable', 'cc', 'malloc']
 
 class TelemetoryResults(object):
     def __init__(self, results_json_path):
@@ -154,6 +168,7 @@ class TelemetoryResults(object):
                 'allocator_sizes': allocator_sizes,
                 'page_id': page_id,
                 'partitions': html_trace.partitions,
+                'partitions_allocated_sizes': html_trace.partitions_allocated_sizes,
                 'partition_details': html_trace.partition_details,
                 'name': name,
                 'url': value['url'],
@@ -172,9 +187,10 @@ class SpreadSheetUpdater(object):
         spreadsheet = collection[self._sheet_id]
         sorted_results = sorted(results.values(),
                                 key=lambda page: page['page_id'])
-        self._upload_allocator_sizes(sorted_results, spreadsheet)
-        self._upload_partitions(sorted_results, spreadsheet)
-        self._upload_partition_buffer_details(sorted_results, spreadsheet)
+        #self._upload_allocator_sizes(sorted_results, spreadsheet)
+        #self._upload_partitions(sorted_results, spreadsheet)
+        self._upload_partitions_allocated_sizes(sorted_results, spreadsheet)
+        #self._upload_partition_buffer_details(sorted_results, spreadsheet)
         self._upload_partition_fast_malloc_details(sorted_results, spreadsheet)
 
     def _fill_page_names(self, results, worksheet):
@@ -210,6 +226,18 @@ class SpreadSheetUpdater(object):
         self._fill_page_names(results, worksheet)
         def size_getter(column_name, page_values):
             return page_values.get('partitions', {}).get(column_name, 0)
+        self._fill_sizes(columns, size_getter, results, worksheet)
+        worksheet.commit()
+
+    def _upload_partitions_allocated_sizes(self, results, spreadsheet):
+        columns = sorted(results[0]['partitions_allocated_sizes'].keys())
+        worksheet = spreadsheet.add_worksheet(
+            '%s-partitions_allocated_sizes' % self._prefix,
+            rows=len(results) + 1,
+            cols=len(columns) + 1)
+        self._fill_page_names(results, worksheet)
+        def size_getter(column_name, page_values):
+            return page_values.get('partitions_allocated_sizes', {}).get(column_name, 0)
         self._fill_sizes(columns, size_getter, results, worksheet)
         worksheet.commit()
 

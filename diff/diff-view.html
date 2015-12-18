@@ -1,0 +1,43 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="diff-view">
+  <template>
+    <style>
+     .added {
+       background-color: #9f9;
+     }
+     .removed {
+       background-color: #faa;
+     }
+     .unchanged {
+       background-color: #fff;
+     }
+     .empty {
+       background-color: #eee;
+     }
+    </style>
+    <div>
+      <template is="dom-repeat" items="{{attributes}}">
+        <div class$="{{item.annotation}}">{{item.line}}<br></div>
+      </template>
+      <template is="dom-repeat" items="{{operations}}">
+        <div class$="{{item.annotation}}">{{item.line}}<br></div>
+      </template>
+    </div>
+  </template>
+  <script>
+  Polymer({
+    is: 'diff-view',
+    properties: {
+      attributes: {
+        type: Array,
+        notify: true
+      },
+      operations: {
+        type: Array,
+        notify: true
+      }
+    }
+  });
+  </script>
+</dom-module>
