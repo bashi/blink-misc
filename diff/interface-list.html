@@ -1,16 +1,26 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/polymer/paper-listbox.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
 
 <dom-module id="interface-list">
   <template>
-    <div>
-      <input type="text" value="{{filterVal::input}}">
-      <ul>
+    <style>
+     paper-scroll-header-panel {
+       height: 100%;
+     }
+    </style>
+    <paper-scroll-header-panel fixed>
+      <paper-toolbar>
+        <input type="text" value="{{filterVal::input}}">
+      </paper-toolbar>
+      <paper-listbox>
         <template is="dom-repeat" items="{{names}}" as="name" filter="{{_filter(filterVal)}}">
-          <li on-click="_handleClick">{{name}}</li>
+          <paper-item on-click="_handleClick">{{name}}</paper-item>
         </template>
-      </ul>
-    </div>
+      </paper-listbox>
+    </paper-scroll-header-panel>
   </template>
   <script>
 

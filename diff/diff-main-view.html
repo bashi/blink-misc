@@ -1,5 +1,6 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
 
 <link rel="import" href="diff-view.html">
 <link rel="import" href="interface-list.html">
@@ -10,14 +11,20 @@
      * {
        font-family: monospace;
      }
+     #main-panel [main] {
+       overflow-y: auto;
+     }
+     #main-panel [drawer] {
+       overflow-y: auto;
+     }
     </style>
-    <div class="layout horizontal">
-      <interface-list id="list" names={{model.interfaceNames}}></interface-list>
-      <div>
-        <diff-view id="webkit-idl-view"></diff-view>
-      </div>
-      <div>
-        <diff-view id="blink-idl-view"></diff-view>
+    <paper-drawer-panel id="main-panel">
+      <interface-list drawer id="list" names={{model.interfaceNames}}></interface-list>
+      <div main class="layout horizontal">
+        <diff-view id="webkit-idl-view" class="flex-1" title="WebKit">
+        </diff-view>
+        <diff-view id="blink-idl-view" class="flex-1" title="Blink">
+        </diff-view>
       </div>
     </div>
   </template>
