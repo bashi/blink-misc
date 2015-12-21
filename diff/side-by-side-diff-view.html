@@ -1,0 +1,53 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<dom-module id="side-by-side-diff-view">
+  <template>
+    <style>
+     table {
+       border-collapse: collapse;
+       width: 100%;
+     }
+     table, tr, td, th {
+       padding: 0;
+       margin: 0;
+     }
+     .added {
+       background-color: #9f9;
+     }
+     .removed {
+       background-color: #faa;
+     }
+     .unchanged {
+       background-color: #fff;
+     }
+     .empty {
+       background-color: #eee;
+     }
+    </style>
+    <table>
+      <tr class="layout horizontal">
+        <th class="flex-1">{{leftTitle}}</th>
+        <th class="flex-1">{{rightTitle}}</th>
+      </tr>
+      <template is="dom-repeat" items="{{items}}">
+        <tr class="layout horizontal">
+          <td class$="{{item.left.annotation}} flex-1">{{item.left.line}}</td>
+          <td class$="{{item.right.annotation}} flex-1">{{item.right.line}}</td>
+        </tr>
+      </template>
+    </table>
+  </template>
+  <script>
+  Polymer({
+    is: 'side-by-side-diff-view',
+    properties: {
+      leftTitle: String,
+      rightTitle: String,
+      items: {
+        type: Array,
+        notify: true
+      },
+    },
+  });
+  </script>
+</dom-module>
+

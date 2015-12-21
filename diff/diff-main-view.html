@@ -2,8 +2,8 @@
 <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
 
-<link rel="import" href="diff-view.html">
 <link rel="import" href="interface-list.html">
+<link rel="import" href="side-by-side-diff-view.html">
 
 <dom-module id="diff-main-view">
   <template>
@@ -20,12 +20,8 @@
     </style>
     <paper-drawer-panel id="main-panel">
       <interface-list drawer id="list" names={{model.interfaceNames}}></interface-list>
-      <div main class="layout horizontal">
-        <diff-view id="webkit-idl-view" class="flex-1" title="WebKit">
-        </diff-view>
-        <diff-view id="blink-idl-view" class="flex-1" title="Blink">
-        </diff-view>
-      </div>
+      <side-by-side-diff-view main id="diff-view" leftTitle="WebKit" rightTitle="Blink">
+      </side-by-side-diff-view>
     </div>
   </template>
   <script>
@@ -41,20 +37,27 @@
       var list = document.querySelector('#list');
       list.addEventListener('interface-selected',
                             this._onInterfaceSelected.bind(this));
-      this._webkit = document.querySelector('#webkit-idl-view');
-      this._blink =  document.querySelector('#blink-idl-view');
+      document.querySelector('#diff-view').leftTitle = 'WebKit';
+      document.querySelector('#diff-view').rightTitle = 'Blink';
     },
-    showDiff: function(name) {
+    showSideBySideDiff: function(name) {
       if (!this.model)
         return;
       var diffs = this.model.getDiff(name);
-      this._webkit.attributes = diffs.attributes.a;
-      this._blink.attributes = diffs.attributes.b;
-      this._webkit.operations = diffs.operations.a;
-      this._blink.operations = diffs.operations.b;
+      var items = [];
+      var convertFunc = function(a, b) {
+        for (var i = 0; i < a.length; i++) {
+          items.push({left: a[i], right: b[i]});
+        }
+      };
+      convertFunc(diffs.attributes.a, diffs.attributes.b);
+      convertFunc(diffs.operations.a, diffs.operations.b);
+      console.log(items);
+      document.querySelector('#diff-view').items = items;
     },
     _onInterfaceSelected: function(e) {
-      this.showDiff(e.detail.name);
+      //this.showDiff(e.detail.name);
+      this.showSideBySideDiff(e.detail.name);
     }
   });
   </script>
