@@ -86,7 +86,20 @@
       return {a: linesA, b: linesB};
     },
     _diffConstants: function(wk, bl) {
-      return undefined;
+      var compare = function(a, b) {
+        return a.value - b.value;
+      };
+      var toLine = function(val) {
+        return [
+          'const',
+          val.idl_type.base_type,
+          val.name,
+          '=',
+          val.value + ';'
+        ].join(' ');
+      };
+      return this._computeDiff(
+        wk['constants'], bl['constants'], compare, toLine);
     },
     _diffAttributes: function(wk, bl) {
       var compare = function(a, b) {

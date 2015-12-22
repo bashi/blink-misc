@@ -34,8 +34,8 @@
       var list = document.querySelector('#list');
       list.addEventListener('interface-selected',
                             this._onInterfaceSelected.bind(this));
-      document.querySelector('#diff-view').leftTitle = 'WebKit';
-      document.querySelector('#diff-view').rightTitle = 'Blink';
+      document.querySelector('#diff-view').leftTitle = 'WebKit r147502';
+      document.querySelector('#diff-view').rightTitle = 'Blink ref/heads/master/366490';
     },
     showSideBySideDiff: function(name) {
       if (!this.model)
@@ -47,6 +47,7 @@
           items.push({left: a[i], right: b[i]});
         }
       };
+      convertFunc(diffs.constants.a, diffs.constants.b);
       convertFunc(diffs.attributes.a, diffs.attributes.b);
       convertFunc(diffs.operations.a, diffs.operations.b);
       document.querySelector('#diff-view').items = items;
