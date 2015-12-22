@@ -99,6 +99,7 @@
         return [
           attr.is_static ? 'static' : '',
           attr.is_read_only ? 'readonly' : '',
+          'attribute',
           attr.idl_type.base_type,
           attr.name + ';'
         ].join(' ').trim();
