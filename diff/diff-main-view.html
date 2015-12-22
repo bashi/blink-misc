@@ -8,9 +8,6 @@
 <dom-module id="diff-main-view">
   <template>
     <style>
-     * {
-       font-family: monospace;
-     }
      #main-panel [main] {
        overflow-y: auto;
      }
@@ -52,11 +49,9 @@
       };
       convertFunc(diffs.attributes.a, diffs.attributes.b);
       convertFunc(diffs.operations.a, diffs.operations.b);
-      console.log(items);
       document.querySelector('#diff-view').items = items;
     },
     _onInterfaceSelected: function(e) {
-      //this.showDiff(e.detail.name);
       this.showSideBySideDiff(e.detail.name);
     }
   });

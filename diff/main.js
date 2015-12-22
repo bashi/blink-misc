@@ -60,8 +60,8 @@
       };
     },
     _computeDiff: function(valuesA, valuesB, compare, toLine) {
-      valuesA.sort(compare);
-      valuesB.sort(compare);
+      valuesA.sort((a, b) => compareValues(a, b, compare));
+      valuesB.sort((a, b) => compareValues(a, b, compare));
 
       var linesA = [], linesB = [];
       var i = 0, j = 0;
