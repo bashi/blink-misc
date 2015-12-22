@@ -14,7 +14,7 @@ from idl_definitions import IdlDefinitions
 from old_webkit_idl_parser import WebKitIDLParser
 
 
-class Converter(object):
+class ConverterBase(object):
     """Parse IDL files, convert into a JSON object, merging implements/partial.
     """
 
@@ -24,15 +24,21 @@ class Converter(object):
         self._implements = defaultdict(list)
         self._interfaces = {}
 
-    def parse_file(self, path):
-        # WebKit IDLs could have some macros. Remove them.
-        preprocessed = subprocess.check_output([
-            'gcc', '-E', '-P', '-x', 'c++', path])
-        idl_nodes = self._parser.ParseText(path, preprocessed)
+    def _read_idl_content(self, path):
+        with open(path) as f:
+            return f.read()
+
+    def _post_process(self, definitions):
+        return definitions
+
+    def process_idl_file(self, path):
+        content = self._read_idl_content(path)
+        idl_nodes = self._parser.ParseText(path, content)
         if self._parser.GetErrors() > 0:
             raise Exception('Failed to parse %s' % path)
         idl_name, _ = os.path.splitext(os.path.basename(path))
         definitions = IdlDefinitions(idl_name, idl_nodes)
+        definitions = self._post_process(definitions)
 
         self._interfaces.update({
             interface.name: interface
@@ -85,6 +91,33 @@ class Converter(object):
                           default=_default, sort_keys=True)
 
 
+class BlinkConverter(ConverterBase):
+    def __init__(self):
+        super(BlinkConverter, self).__init__(BlinkIDLParser())
+
+
+class WebKitConverter(ConverterBase):
+    def __init__(self):
+        super(WebKitConverter, self).__init__(WebKitIDLParser())
+
+    def _read_idl_content(self, path):
+        # WebKit IDLs could have some macros. Remove them.
+        preprocessed = subprocess.check_output([
+            'gcc', '-E', '-P', '-x', 'c++', path])
+        return preprocessed
+
+    def _post_process(self, definitions):
+        # TODO(bashi): Handle [InterfaceName]
+        for interface in definitions.interfaces.itervalues():
+            self._update_interface(interface)
+        return definitions
+
+    def _update_interface(self, interface):
+        interface_name = interface.extended_attributes.get('InterfaceName')
+        if interface_name:
+            interface.name = interface_name
+
+
 _BLACKLISTED_IDL_FILES = [
     'InjectedScriptHost.idl',
     'InspectorInstrumentation.idl',
@@ -110,17 +143,17 @@ def target_files(path):
     return all_idl_files(path)
 
 
-def _create_parser(path):
+def _create_converter(path):
     # Assumes that if the absolute path contains 'WebCore', it's WebKit.
     if 'WebCore' in os.path.abspath(path):
-        return WebKitIDLParser()
-    return BlinkIDLParser()
+        return WebKitConverter()
+    return BlinkConverter()
 
 
 def to_json(path):
-    converter = Converter(_create_parser(path))
+    converter = _create_converter(path)
     for filename in target_files(path):
-        converter.parse_file(filename)
+        converter.process_idl_file(filename)
     return converter.to_json()
 
 

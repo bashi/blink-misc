@@ -97,7 +97,12 @@ class WebKitIDLParser(BlinkIDLParser):
 
     def p_ExtendedAttributeLegacyList(self, p):
         """ExtendedAttributeLegacyList : identifier '=' LegacyArgList"""
-        p[0] = self.BuildNamed('ExtAttribute', p, 1, None)
+        items = p[3]
+        if len(items) == 1:
+            value = self.BuildAttribute('VALUE', items[0])
+        else:
+            value = self.BuildAttribute('VALUE', items)
+        p[0] = self.BuildNamed('ExtAttribute', p, 1, value)
 
     def p_ExtendedAttributeKeyword(self, p):
         """ExtendedAttributeKeyword : identifier '=' ExtAttrKeyword"""
@@ -116,13 +121,15 @@ class WebKitIDLParser(BlinkIDLParser):
     def p_LegacyArgList(self, p):
         """LegacyArgList : identifier LegacyArgs
                    |"""
-        pass
+        if len(p) > 1:
+            p[0] = ListFromConcat(p[1], p[2])
 
     def p_LegacyArgs(self, p):
         """LegacyArgs : '&' identifier LegacyArgs
                       | '|' identifier LegacyArgs
                       |"""
-        pass
+        if len(p) > 1:
+            p[0] = ListFromConcat(p[2], p[3])
 
     def p_ExtendedAttribute(self, p):
         """ExtendedAttribute : ExtendedAttributeNoArgs
