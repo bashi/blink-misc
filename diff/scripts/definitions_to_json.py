@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+"""Parse IDL files and dump them as json.
+
+TODOs:
+- Support "Supplemental" in WebKit
+
+"""
+
 from collections import defaultdict
 import json
 import os
@@ -9,7 +16,7 @@ import sys
 import insert_crpath
 
 from blink_idl_parser import BlinkIDLParser
-from idl_definitions import IdlDefinitions
+from idl_definitions import IdlDefinitions, Visitor
 
 from old_webkit_idl_parser import WebKitIDLParser
 
@@ -28,8 +35,11 @@ class ConverterBase(object):
         with open(path) as f:
             return f.read()
 
-    def _post_process(self, definitions):
+    def _rewrite_definitions(self, definitions):
         return definitions
+
+    def _post_process(self, interfaces):
+        return interfaces
 
     def process_idl_file(self, path):
         content = self._read_idl_content(path)
@@ -38,7 +48,7 @@ class ConverterBase(object):
             raise Exception('Failed to parse %s' % path)
         idl_name, _ = os.path.splitext(os.path.basename(path))
         definitions = IdlDefinitions(idl_name, idl_nodes)
-        definitions = self._post_process(definitions)
+        definitions = self._rewrite_definitions(definitions)
 
         self._interfaces.update({
             interface.name: interface
@@ -81,10 +91,11 @@ class ConverterBase(object):
             self._merge_partial(partial_interface)
         for interface in self._interfaces.itervalues():
             self._merge_implements(interface)
+        return self._interfaces
 
     def to_json(self):
-        self._merge()
-        interfaces = self._interfaces
+        interfaces = self._merge()
+        interfaces = self._post_process(interfaces)
         def _default(obj):
             return obj.__dict__
         return json.dumps(interfaces, indent=2,
@@ -96,9 +107,24 @@ class BlinkConverter(ConverterBase):
         super(BlinkConverter, self).__init__(BlinkIDLParser())
 
 
+class NameRewriteVisitor(Visitor):
+    def __init__(self, name_map):
+        self._name_map = name_map
+
+    def rewrite(self, interface):
+        interface.accept(self)
+
+    def visit_typed_object(self, typed_object):
+        if not typed_object.idl_type:
+            return
+        original = typed_object.idl_type.base_type
+        typed_object.idl_type.base_type = self._name_map.get(original, original)
+
+
 class WebKitConverter(ConverterBase):
     def __init__(self):
         super(WebKitConverter, self).__init__(WebKitIDLParser())
+        self._interface_name_map = {}
 
     def _read_idl_content(self, path):
         # WebKit IDLs could have some macros. Remove them.
@@ -106,16 +132,22 @@ class WebKitConverter(ConverterBase):
             'gcc', '-E', '-P', '-x', 'c++', path])
         return preprocessed
 
-    def _post_process(self, definitions):
-        # TODO(bashi): Handle [InterfaceName]
+    def _rewrite_definitions(self, definitions):
         for interface in definitions.interfaces.itervalues():
-            self._update_interface(interface)
+            self._rewrite_interface(interface)
         return definitions
 
-    def _update_interface(self, interface):
+    def _rewrite_interface(self, interface):
         interface_name = interface.extended_attributes.get('InterfaceName')
         if interface_name:
+            self._interface_name_map[interface.name] = interface_name
             interface.name = interface_name
+
+    def _post_process(self, interfaces):
+        name_rewriter = NameRewriteVisitor(self._interface_name_map)
+        for interface in interfaces.itervalues():
+            name_rewriter.rewrite(interface)
+        return interfaces
 
 
 _BLACKLISTED_IDL_FILES = [
