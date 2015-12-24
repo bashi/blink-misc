@@ -1181,10 +1181,7 @@
             "extended_attributes": {}, 
             "idl_name": "AudioContext", 
             "idl_type": {
-              "base_type": "ArrayBuffer", 
-              "inner_type": {
-                "base_type": "ArrayBuffer"
-              }
+              "base_type": "ArrayBuffer"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -1903,10 +1900,7 @@
             "extended_attributes": {}, 
             "idl_name": "AudioNode", 
             "idl_type": {
-              "base_type": "AudioNode", 
-              "inner_type": {
-                "base_type": "AudioNode"
-              }
+              "base_type": "AudioNode"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -1956,10 +1950,7 @@
             "extended_attributes": {}, 
             "idl_name": "AudioNode", 
             "idl_type": {
-              "base_type": "AudioParam", 
-              "inner_type": {
-                "base_type": "AudioParam"
-              }
+              "base_type": "AudioParam"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -6020,10 +6011,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "float"
-              }
+              "base_type": "sequence<float>"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -6045,10 +6033,7 @@
         "extended_attributes": {}, 
         "idl_name": "CanvasRenderingContext2D", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "float"
-          }
+          "base_type": "sequence<float>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -7631,10 +7616,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLImageElement", 
-              "inner_type": {
-                "base_type": "HTMLImageElement"
-              }
+              "base_type": "HTMLImageElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -7680,10 +7662,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLImageElement", 
-              "inner_type": {
-                "base_type": "HTMLImageElement"
-              }
+              "base_type": "HTMLImageElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -7751,10 +7730,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLImageElement", 
-              "inner_type": {
-                "base_type": "HTMLImageElement"
-              }
+              "base_type": "HTMLImageElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -7866,10 +7842,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLCanvasElement", 
-              "inner_type": {
-                "base_type": "HTMLCanvasElement"
-              }
+              "base_type": "HTMLCanvasElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -7915,10 +7888,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLCanvasElement", 
-              "inner_type": {
-                "base_type": "HTMLCanvasElement"
-              }
+              "base_type": "HTMLCanvasElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -7986,10 +7956,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLCanvasElement", 
-              "inner_type": {
-                "base_type": "HTMLCanvasElement"
-              }
+              "base_type": "HTMLCanvasElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8576,10 +8543,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8625,10 +8589,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8718,10 +8679,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8767,10 +8725,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8860,10 +8815,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLCanvasElement", 
-              "inner_type": {
-                "base_type": "HTMLCanvasElement"
-              }
+              "base_type": "HTMLCanvasElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8900,10 +8852,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "HTMLImageElement", 
-              "inner_type": {
-                "base_type": "HTMLImageElement"
-              }
+              "base_type": "HTMLImageElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -8940,10 +8889,7 @@
             "extended_attributes": {}, 
             "idl_name": "CanvasRenderingContext2D", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -10513,10 +10459,7 @@
         "extended_attributes": {}, 
         "idl_name": "Coordinates", 
         "idl_type": {
-          "base_type": "double", 
-          "inner_type": {
-            "base_type": "double"
-          }
+          "base_type": "double"
         }, 
         "is_read_only": true, 
         "is_static": false, 
@@ -10536,10 +10479,7 @@
         "extended_attributes": {}, 
         "idl_name": "Coordinates", 
         "idl_type": {
-          "base_type": "double", 
-          "inner_type": {
-            "base_type": "double"
-          }
+          "base_type": "double"
         }, 
         "is_read_only": true, 
         "is_static": false, 
@@ -10549,10 +10489,7 @@
         "extended_attributes": {}, 
         "idl_name": "Coordinates", 
         "idl_type": {
-          "base_type": "double", 
-          "inner_type": {
-            "base_type": "double"
-          }
+          "base_type": "double"
         }, 
         "is_read_only": true, 
         "is_static": false, 
@@ -10562,10 +10499,7 @@
         "extended_attributes": {}, 
         "idl_name": "Coordinates", 
         "idl_type": {
-          "base_type": "double", 
-          "inner_type": {
-            "base_type": "double"
-          }
+          "base_type": "double"
         }, 
         "is_read_only": true, 
         "is_static": false, 
@@ -14005,10 +13939,7 @@
             "extended_attributes": {}, 
             "idl_name": "DataTransferItemList", 
             "idl_type": {
-              "base_type": "File", 
-              "inner_type": {
-                "base_type": "File"
-              }
+              "base_type": "File"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -19109,10 +19040,7 @@
             "extended_attributes": {}, 
             "idl_name": "EXTDrawBuffers", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "GLenum"
-              }
+              "base_type": "sequence<GLenum>"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -20885,10 +20813,7 @@
         }, 
         "idl_name": "Element", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "Range"
-          }
+          "base_type": "sequence<Range>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -25569,10 +25494,7 @@
         "extended_attributes": {}, 
         "idl_name": "Gamepad", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "float"
-          }
+          "base_type": "float[]"
         }, 
         "is_read_only": true, 
         "is_static": false, 
@@ -25582,10 +25504,7 @@
         "extended_attributes": {}, 
         "idl_name": "Gamepad", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "float"
-          }
+          "base_type": "float[]"
         }, 
         "is_read_only": true, 
         "is_static": false, 
@@ -37404,10 +37323,7 @@
             "extended_attributes": {}, 
             "idl_name": "IDBDatabase", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "DOMString"
-              }
+              "base_type": "sequence<DOMString>"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -37850,10 +37766,7 @@
             }, 
             "idl_name": "IDBIndex", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -37933,10 +37846,7 @@
             }, 
             "idl_name": "IDBIndex", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38014,10 +37924,7 @@
             "extended_attributes": {}, 
             "idl_name": "IDBIndex", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38069,10 +37976,7 @@
             "extended_attributes": {}, 
             "idl_name": "IDBIndex", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38126,10 +38030,7 @@
             }, 
             "idl_name": "IDBIndex", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38588,10 +38489,7 @@
             "extended_attributes": {}, 
             "idl_name": "IDBObjectStore", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38659,10 +38557,7 @@
             "extended_attributes": {}, 
             "idl_name": "IDBObjectStore", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38716,10 +38611,7 @@
             }, 
             "idl_name": "IDBObjectStore", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38808,10 +38700,7 @@
             "extended_attributes": {}, 
             "idl_name": "IDBObjectStore", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "DOMString"
-              }
+              "base_type": "sequence<DOMString>"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -38952,10 +38841,7 @@
             }, 
             "idl_name": "IDBObjectStore", 
             "idl_type": {
-              "base_type": "IDBKeyRange", 
-              "inner_type": {
-                "base_type": "IDBKeyRange"
-              }
+              "base_type": "IDBKeyRange"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -43544,10 +43430,7 @@
             "extended_attributes": {}, 
             "idl_name": "MediaStream", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "MediaStreamTrack"
-              }
+              "base_type": "MediaStreamTrack[]"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -43589,10 +43472,7 @@
         "extended_attributes": {}, 
         "idl_name": "MediaStream", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "MediaStreamTrack"
-          }
+          "base_type": "sequence<MediaStreamTrack>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -43604,10 +43484,7 @@
         "extended_attributes": {}, 
         "idl_name": "MediaStream", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "MediaStreamTrack"
-          }
+          "base_type": "sequence<MediaStreamTrack>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -45605,10 +45482,7 @@
         "extended_attributes": {}, 
         "idl_name": "MutationObserver", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "MutationRecord"
-          }
+          "base_type": "sequence<MutationRecord>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -46841,10 +46715,7 @@
             "extended_attributes": {}, 
             "idl_name": "NavigatorVibration", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "unsigned long"
-              }
+              "base_type": "sequence<unsigned long>"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -51500,10 +51371,7 @@
         "extended_attributes": {}, 
         "idl_name": "PropertyNodeList", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "MicroDataItemValue"
-          }
+          "base_type": "sequence<MicroDataItemValue>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -52932,10 +52800,7 @@
         "extended_attributes": {}, 
         "idl_name": "RTCPeerConnection", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "MediaStream"
-          }
+          "base_type": "sequence<MediaStream>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -52947,10 +52812,7 @@
         "extended_attributes": {}, 
         "idl_name": "RTCPeerConnection", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "MediaStream"
-          }
+          "base_type": "sequence<MediaStream>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -53569,10 +53431,7 @@
         "extended_attributes": {}, 
         "idl_name": "RTCStatsReport", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "DOMString"
-          }
+          "base_type": "sequence<DOMString>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -53613,10 +53472,7 @@
         "extended_attributes": {}, 
         "idl_name": "RTCStatsResponse", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "RTCStatsReport"
-          }
+          "base_type": "sequence<RTCStatsReport>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -70192,10 +70048,7 @@
         "extended_attributes": {}, 
         "idl_name": "ScriptProfileNode", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "ScriptProfileNode"
-          }
+          "base_type": "sequence<ScriptProfileNode>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -73016,10 +72869,7 @@
         "extended_attributes": {}, 
         "idl_name": "SpeechSynthesis", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "SpeechSynthesisVoice"
-          }
+          "base_type": "sequence<SpeechSynthesisVoice>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -77005,10 +76855,7 @@
             "extended_attributes": {}, 
             "idl_name": "DOMURL", 
             "idl_type": {
-              "base_type": "Blob", 
-              "inner_type": {
-                "base_type": "Blob"
-              }
+              "base_type": "Blob"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -81630,10 +81477,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ArrayBuffer", 
-              "inner_type": {
-                "base_type": "ArrayBuffer"
-              }
+              "base_type": "ArrayBuffer"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -81681,10 +81525,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ArrayBufferView", 
-              "inner_type": {
-                "base_type": "ArrayBufferView"
-              }
+              "base_type": "ArrayBufferView"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -81791,10 +81632,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ArrayBuffer", 
-              "inner_type": {
-                "base_type": "ArrayBuffer"
-              }
+              "base_type": "ArrayBuffer"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -81842,10 +81680,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ArrayBufferView", 
-              "inner_type": {
-                "base_type": "ArrayBufferView"
-              }
+              "base_type": "ArrayBufferView"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -83884,10 +83719,7 @@
         }, 
         "idl_name": "WebGLRenderingContext", 
         "idl_type": {
-          "base_type": null, 
-          "element_type": {
-            "base_type": "DOMString"
-          }
+          "base_type": "sequence<DOMString>"
         }, 
         "is_constructor": false, 
         "is_static": false, 
@@ -85207,10 +85039,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ArrayBufferView", 
-              "inner_type": {
-                "base_type": "ArrayBufferView"
-              }
+              "base_type": "ArrayBufferView"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85291,10 +85120,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85375,10 +85201,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "HTMLImageElement", 
-              "inner_type": {
-                "base_type": "HTMLImageElement"
-              }
+              "base_type": "HTMLImageElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85459,10 +85282,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "HTMLCanvasElement", 
-              "inner_type": {
-                "base_type": "HTMLCanvasElement"
-              }
+              "base_type": "HTMLCanvasElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85576,10 +85396,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ArrayBufferView", 
-              "inner_type": {
-                "base_type": "ArrayBufferView"
-              }
+              "base_type": "ArrayBufferView"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85671,10 +85488,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "ImageData", 
-              "inner_type": {
-                "base_type": "ImageData"
-              }
+              "base_type": "ImageData"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85766,10 +85580,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "HTMLImageElement", 
-              "inner_type": {
-                "base_type": "HTMLImageElement"
-              }
+              "base_type": "HTMLImageElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -85861,10 +85672,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebGLRenderingContext", 
             "idl_type": {
-              "base_type": "HTMLCanvasElement", 
-              "inner_type": {
-                "base_type": "HTMLCanvasElement"
-              }
+              "base_type": "HTMLCanvasElement"
             }, 
             "is_optional": null, 
             "is_variadic": false, 
@@ -89522,10 +89330,7 @@
             "extended_attributes": {}, 
             "idl_name": "WebSocket", 
             "idl_type": {
-              "base_type": null, 
-              "element_type": {
-                "base_type": "DOMString"
-              }
+              "base_type": "sequence<DOMString>"
             }, 
             "is_optional": null, 
             "is_variadic": false, 

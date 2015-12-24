@@ -17,6 +17,7 @@ import insert_crpath
 
 from blink_idl_parser import BlinkIDLParser
 from idl_definitions import IdlDefinitions, Visitor
+import idl_types
 
 from old_webkit_idl_parser import WebKitIDLParser
 
@@ -97,6 +98,22 @@ class ConverterBase(object):
         interfaces = self._merge()
         interfaces = self._post_process(interfaces)
         def _default(obj):
+            if issubclass(type(obj), idl_types.IdlSequenceType):
+                return {
+                    'base_type': str(obj),
+                }
+            elif issubclass(type(obj), idl_types.IdlArrayType):
+                return {
+                    'base_type': str(obj),
+                }
+            elif issubclass(type(obj), idl_types.IdlUnionType):
+                return {
+                    'base_type': str(obj),
+                }
+            elif issubclass(type(obj), idl_types.IdlNullableType):
+                return {
+                    'base_type': str(obj),
+                }
             return obj.__dict__
         return json.dumps(interfaces, indent=2,
                           default=_default, sort_keys=True)
