@@ -21,6 +21,7 @@ tr.exportTo('pi.m', function() {
 
       var peak = {
         pid: process.pid,
+        name: process.name,
         label: process.labels.join(', '),
         size: -1,
         timestamp: 0

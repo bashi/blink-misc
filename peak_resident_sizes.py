@@ -1,58 +1,69 @@
 import json
+import math
 import os
 import sys
 
 
-def get_name(peak_obj):
-    index = peak_obj['name'].find(': ')
-    if index < 0:
-        return None
-    return peak_obj['name'][index+2:]
+def calc_stats(values):
+    total = 0.0
+    doubled = 0.0
+    hiest = values[0]
+    lowest = values[0]
+    for value in values:
+        total += value
+        doubled += value * value
+        if lowest > value:
+            lowest = value
+        if hiest < value:
+            hiest = value
+    average = total / len(values)
+    variance = doubled / len(values) - average * average
+    return {
+        'average': average,
+        'variance': variance,
+        'hiest': hiest,
+        'lowest': lowest,
+    }
 
 
-class Average(object):
+# This should be synced with mappers/peak_resident_sizes_map_function.html
+_PEAK_VALUE_NAME = 'peakResidentBytes'
+
+class Peaks(object):
     def __init__(self):
-        # page name -> peaks
+        # label -> peaks
         self._pages = {}
 
     def add_mapping_result(self, results):
-        for value in results['values']:
+        peak_values = [v for v in results['values']
+                       if v.get('name') == _PEAK_VALUE_NAME]
+        for value in peak_values:
             for peak in value['value'].itervalues():
-                name = get_name(peak)
-                if not name:
-                    continue
-                if not name in self._pages.keys():
-                    self._pages[name] = []
-                self._pages[name].append(peak['size'])
+                label = peak['label']
+                if not label in self._pages.keys():
+                    self._pages[label] = []
+                self._pages[label].append(peak['size'])
 
-    def print_calc(self):
-        for page_name in sorted(self._pages):
-            peaks = self._pages[page_name]
-            total = 0.0
-            lowest = peaks[0]
-            hiest = peaks[0]
-            for size in peaks:
-                total += size
-                if lowest > size:
-                    lowest = size
-                if hiest < size:
-                    hiest = size
-            average = total / len(peaks)
-            print('[%s]\n  %.2f, %.2f, %.2f' % (
-                page_name,
-                average / 1024**2,
-                float(lowest) / 1024**2,
-                float(hiest) / 1024**2))
-            #print('%.2f' % (float(lowest) / 1024**2))
+    def get_stats(self):
+        return {label: calc_stats(values) for label, values
+                in self._pages.iteritems()}
 
 
 def main(args):
-    average = Average()
+    peaks = Peaks()
     for path in args:
         with open(path) as f:
             obj = json.load(f)
-        average.add_mapping_result(obj)
-    average.print_calc()
+        peaks.add_mapping_result(obj)
+    stats = peaks.get_stats()
+    for label in sorted(stats):
+        stat = stats[label]
+        print('[%s]\n%.2f, %.2f, %.2f, %.2f' % (
+            label.encode('utf-8'),
+            stat['average'] / 1024**2,
+            float(stat['lowest']) / 1024**2,
+            float(stat['hiest']) / 1024**2,
+            math.sqrt(stat['variance']) / 1024**2))
 
 
 if __name__ == '__main__':

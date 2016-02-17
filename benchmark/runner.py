@@ -5,6 +5,9 @@ from util import get_chromium_path
 
 from telemetry import benchmark_runner
 from telemetry import project_config
+from telemetry.internal import story_runner
+from telemetry.internal.results import results_options
+from telemetry.internal.util import command_line
 
 
 _CHROMIUM_CLIENT_CONFIG_PATH = os.path.join(
@@ -29,6 +32,32 @@ class MyConfig(project_config.ProjectConfig):
             default_chrome_root=default_chrome_root)
 
 
+# Partially copied from telemetry.telemetry.internal.story_runner.RunBenchmark
+def run_benchmark(benchmark, finder_options):
+    benchmark.CustomizeBrowserOptions(finder_options.browser_options)
+    pt = benchmark.CreatePageTest(finder_options)
+    pt.__name__ = benchmark.__class__.__name__
+    stories = benchmark.CreateStorySet(finder_options)
+    benchmark_metadata = benchmark.GetMetadata()
+    with results_options.CreateResults(
+            benchmark_metadata, finder_options,
+            benchmark.ValueCanBeAddedPredicate) as results:
+        failures = story_runner.Run(pt, stories, finder_options, results,
+                                    benchmark.max_failures)
+        results._SerializeTracesToDirPath(results._output_dir)
+    return failures
+
+
+class RecordTrace(benchmark_runner.Run):
+    def Run(self, args):
+        return run_benchmark(self._benchmark(), args)
+
+
 def main():
     config = MyConfig()
-    return benchmark_runner.main(config)
+    extra_commands = [RecordTrace]
+    return benchmark_runner.main(config, extra_commands=extra_commands)
+
+
+if __name__ == '__main__':
+    main()

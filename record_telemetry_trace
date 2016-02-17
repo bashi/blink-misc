@@ -1,0 +1,5 @@
+#!/bin/bash
+
+python -m benchmark.runner record_trace \
+    --output-dir=telemetry_results/default \
+    --use-live-sites $@
