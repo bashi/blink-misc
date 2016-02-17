@@ -36,6 +36,7 @@ def read_trace(filename):
     else:
         raise Exception('Unsupported format: ' + ext)
 
+
 def main(args):
     trace_data = read_trace(args[0])
     print(json.dumps(trace_data, indent=2))

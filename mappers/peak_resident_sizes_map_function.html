@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2016 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+<link rel="import" href="/perf_insights/function_handle.html">
+<link rel="import" href="/tracing/extras/chrome/chrome_model_helper.html">
+<link rel="import" href="/tracing/value/value.html">
+
+<script>
+'use strict';
+
+tr.exportTo('pi.m', function() {
+  function peakResidentSizesMapFunction(results, model) {
+    var peaks = {};
+    for (var process of model.getAllProcesses()) {
+      if (process.name !== 'Renderer') {
+        continue;
+      }
+
+      var peak = {
+        pid: process.pid,
+        label: process.labels.join(', '),
+        size: -1,
+        timestamp: 0
+      };
+
+      process.sortMemoryDumps();
+      for (var processDump of process.memoryDumps) {
+        if (processDump.totals === undefined) {
+          continue;
+        }
+        //var peakResidentBytes = processDump.totals.peakResidentBytes ||
+        //                        processDump.totals.residentBytes;
+        var peakResidentBytes = processDump.totals.peakResidentBytes;
+        if (peak.size < peakResidentBytes) {
+          peak.size = peakResidentBytes;
+          peak.timestamp = processDump.start;
+        }
+      }
+
+      if (peak.size > 0) {
+        peaks[process.pid] = peak;
+      }
+    }
+
+    results.addValue(new tr.v.DictValue(
+      model.canonicalUrlThatCreatedThisTrace, 'peakResidentBytes', peaks));
+  }
+
+  pi.FunctionRegistry.register(peakResidentSizesMapFunction);
+
+  return {
+    peakResidentSizesMapFunctionForTest: peakResidentSizesMapFunction,
+  };
+});
+
+</script>
